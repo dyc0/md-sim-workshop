@@ -11,9 +11,7 @@ def kinetic_energy(velocities, masses):
     """Total kinetic energy, KE = sum over particles of 1/2 * m * |v|^2."""
     # ZADATAK 2: izračunajte ukupnu kinetičku energiju svih čestica,
     # KE = zbir po česticama od 1/2 * m * |v|^2.
-    # - velocities ima oblik (N, DIM): jedan red po čestici, npr. [vx, vy].
-    # - masses ima oblik (N,): masa svake čestice.
-    # - |v|^2 = vx^2 + vy^2 (zbir kvadrata komponenti brzine).
+
     # Vratite jedan broj (float). Dok ovo ne uradite, funkcija vraća 0.0,
     # pa je kinetička energija na grafiku ravna linija na nuli.
     return 0.0

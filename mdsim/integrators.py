@@ -40,14 +40,7 @@ def velocity_verlet_step(system, forces, dt, compute_forces):
     masses = system.masses[:, None]
     # ZADATAK 3: napišite jedan korak metode velocity Verlet.
     # Ubrzanje je a = forces / masses (masses već ima oblik (N, 1), pa deljenje radi).
-    # 1. Pomerite čestice: x_novo = x + v*dt + 1/2*a*dt^2 (menjajte system.positions).
-    # 2. Vratite čestice u kutiju: system.positions %= system.box
-    # 3. Izračunajte sile na novim pozicijama:
-    #    new_forces, potential_energy = compute_forces(
-    #        system.positions, system.box, system.sigmas, system.epsilons)
-    # 4. Promenite brzine pomoću proseka starog i novog ubrzanja:
-    #    v_novo = v + 1/2*(a + a_novo)*dt, gde je a_novo = new_forces / masses.
-    # 5. Vratite new_forces, potential_energy.
     # Pogledajte euler_step iznad: isti koraci, za jednostavniju metodu.
+
     # Dok ovo ne uradite, čestice stoje u mestu (sile se računaju, ali ništa se ne pomera).
     return compute_forces(system.positions, system.box, system.sigmas, system.epsilons)

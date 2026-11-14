@@ -245,10 +245,7 @@ def plot_energies(trajectory, ax=None):
     # ZADATAK 2: nacrtajte tri krive u odnosu na vreme (trajectory.times):
     # kinetičku (trajectory.kinetic_energy), potencijalnu
     # (trajectory.potential_energy) i ukupnu energiju (trajectory.total_energy).
-    # - Za svaku krivu jedan poziv ax.plot(x, y, color=..., label="...");
-    #   boje su colors[0], colors[1] i colors[2].
-    # - Ose: ax.set_xlabel("time (τ)") i ax.set_ylabel("energy (ε)").
-    # - Na kraju ax.legend(), da se vidi koja kriva je koja.
+
     # Dok ovo ne uradite, grafik ostaje prazan.
     return ax
 
