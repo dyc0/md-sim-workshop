@@ -1,0 +1,9 @@
+output/
+*.npz
+__pycache__/
+.pytest_cache/
+*.egg-info/
+*.nbi
+*.nbc
+examples_lecturer/
+.venv/
