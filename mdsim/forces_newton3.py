@@ -24,10 +24,42 @@ def compute_forces(positions, box, sigmas, epsilons):
 
     Returns (forces, potential_energy); forces has shape (N, DIM).
     """
-    # ZADATAK 4a: napišite sile koristeći treći Njutnov zakon.
-    # Sila kojom j deluje na i je suprotna sili kojom i deluje na j (F_ji = -F_ij),
-    # pa svaki par čestica obiđite samo jednom i uštedite pola posla.
-    
-    # Dok ovo ne uradite, funkcija vraća nulte sile (čestice se kreću pravo,
-    # kao da ne osećaju jedna drugu).
-    return np.zeros(positions.shape), 0.0
+    # Plain Python lists, so the loops below measure pure Python speed.
+    pos = positions.tolist()
+    box_list = box.tolist()
+    sig = sigmas.tolist()
+    eps = epsilons.tolist()
+    n = len(pos)
+    dim = len(box_list)
+
+    forces = [[0.0] * dim for _ in range(n)]
+    potential_energy = 0.0
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            # Separation vector d = r_i - r_j, using the nearest periodic copy of j.
+            d = [0.0] * dim
+            r2 = 0.0
+            for k in range(dim):
+                dk = pos[i][k] - pos[j][k]
+                dk = dk - box_list[k] * round(dk / box_list[k])
+                d[k] = dk
+                r2 += dk * dk
+
+            # Mixing rules for two different particles (Lorentz-Berthelot).
+            sigma_ij = 0.5 * (sig[i] + sig[j])
+            epsilon_ij = (eps[i] * eps[j]) ** 0.5
+            cutoff = 2.5 * sigma_ij
+            if r2 >= cutoff * cutoff:
+                continue
+
+            sr2 = sigma_ij * sigma_ij / r2
+            sr6 = sr2 * sr2 * sr2
+            sr12 = sr6 * sr6
+            potential_energy += 4.0 * epsilon_ij * (sr12 - sr6) - epsilon_ij * SHIFT
+            strength = 24.0 * epsilon_ij * (2.0 * sr12 - sr6) / r2
+            for k in range(dim):
+                forces[i][k] += strength * d[k]
+                forces[j][k] -= strength * d[k]
+
+    return np.array(forces), potential_energy

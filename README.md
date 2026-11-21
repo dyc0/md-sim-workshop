@@ -70,10 +70,8 @@ example the kinetic energy is zero, or the particles stand still).
 | Problem | What you write | Where | Test |
 |---|---|---|---|
 | 2 | Kinetic and total energy, energy plot | `mdsim/observables.py`, `mdsim/simulation.py`, `mdsim/viz.py` | `pytest tests/test_problem_2.py` |
-| 3 | Velocity Verlet | `mdsim/integrators.py`, `examples/run_live.py` | `pytest tests/test_problem_3.py` |
-| 4a | Forces with Newton's third law | `mdsim/forces_newton3.py` | `pytest tests/test_problem_4a.py` |
-| 4b | Forces with NumPy | `mdsim/forces_numpy.py` | `pytest tests/test_problem_4b.py` |
-| 4c | Forces with Numba | `mdsim/forces_numba.py`, `examples/run_live.py` | `pytest tests/test_problem_4c.py` |
+| 3a | Forces with NumPy | `mdsim/forces_numpy.py` | `pytest tests/test_problem_3a.py` |
+| 3b | Forces with Numba | `mdsim/forces_numba.py`, `examples/run_live.py` | `pytest tests/test_problem_3b.py` |
 
 A problem is done when its test file passes. When the next problem starts,
 the solution of the previous one appears in the folder `solutions/` (get it
@@ -89,14 +87,12 @@ shown in a window and also saved to the folder `output/`.
 
 | Script | Workshop part | What it shows |
 |---|---|---|
-| `examples/run_live.py` | 1 | The fluid moving, live, with an energy plot. Keys: space = pause, r = restart, q = quit, f = fullscreen. Uses forward Euler until Problem 3, which slowly heats up and stops after a while. |
-| `examples/energy_plot.py` | 2 | Kinetic, potential and total energy of a run with forward Euler; the total energy, which should stay constant, grows. |
-| `examples/euler_vs_verlet.py` | 3 | Forward Euler gains energy, velocity Verlet does not. |
-| `examples/timestep_scan.py` | 3 | Energy fluctuation grows like dt²; a too-large dt explodes. |
+| `examples/run_live.py` | 1 | The fluid moving, live, with an energy plot. Keys: space = pause, r = restart, q = quit, f = fullscreen. |
+| `examples/energy_plot.py` | 2 | Kinetic, potential and total energy of a run; the total energy stays constant. |
 | `examples/python_internals.py` | 4 | Python bytecode and memory use of Python numbers vs. NumPy. |
 | `examples/profile_forces.py` | 4 | Profiling: the force calculation takes almost all the time. |
 | `examples/benchmark.py` | 4 | Speed of the four force versions (versions you haven't written yet are skipped). |
-| `examples/mixing.py` | end | Two species mixing: the concentration profile smooths out. Works only once Problems 2–4 are all done. |
+| `examples/mixing.py` | end | Two species mixing: the concentration profile smooths out. Works only once Problem 3b is done. |
 | `examples/play.py` | any | Plays back a saved run: `python examples/play.py output/mixing.npz`. Add a number to play slower, e.g. `... output/mixing.npz 100` (100 ms between pictures). |
 
 ## The code

@@ -1,6 +1,6 @@
-"""Testovi za Zadatak 4b: sile pomoću NumPy-ja (forces_numpy.py).
+"""Testovi za Zadatak 3a: sile pomoću NumPy-ja (forces_numpy.py).
 
-Pokrenite ih sa:  pytest tests/test_problem_4b.py
+Pokrenite ih sa:  pytest tests/test_problem_3a.py
 Dok zadatak nije urađen, ovi testovi padaju (FAILED). Kad sve prođe (passed),
 zadatak je gotov.
 """

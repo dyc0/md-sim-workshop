@@ -16,7 +16,7 @@ def compute_forces(positions, box, sigmas, epsilons):
 
     Returns (forces, potential_energy); forces has shape (N, DIM).
     """
-    # ZADATAK 4b: napišite iste sile bez Python petlji, pomoću NumPy tabela.
+    # ZADATAK 3a: napišite iste sile bez Python petlji, pomoću NumPy tabela.
     # Ideja: umesto da obilazite parove jedan po jedan, napravite tabele
     # (matrice) sa po jednim elementom za svaki par (i, j), i računajte sa
     # celim tabelama odjednom. Finalna implementacija
