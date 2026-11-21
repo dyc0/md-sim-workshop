@@ -65,7 +65,7 @@ Some parts of the code are missing: you write them during the workshop, one
 problem at a time. Every place you need to change starts with a comment
 `# ZADATAK N:` (N = problem number) with short instructions. Until you write
 your part, the code still runs, it just does nothing useful there (for
-example the kinetic energy is zero, or the particles stand still).
+example the kinetic energy is zero, or a force version returns zero forces).
 
 | Problem | What you write | Where | Test |
 |---|---|---|---|
@@ -74,9 +74,17 @@ example the kinetic energy is zero, or the particles stand still).
 | 3b | Forces with Numba | `mdsim/forces_numba.py`, `examples/run_live.py` | `pytest tests/test_problem_3b.py` |
 
 A problem is done when its test file passes. When the next problem starts,
-the solution of the previous one appears in the folder `solutions/` (get it
-with `git pull` on `main`). If you are stuck, you can copy a file from there
-over your own.
+the solution of the previous one appears in the folder `solutions/`. To get
+it and put it into your code (here for Problem 2):
+
+```
+git pull
+python apply_solution.py 2
+```
+
+This replaces your version of the files that problem touches with the
+solution (it asks first if you have changes that are not committed yet).
+Then run the problem's test and commit.
 
 ## Running the scripts
 
