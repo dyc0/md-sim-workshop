@@ -242,11 +242,12 @@ def plot_energies(trajectory, ax=None):
     if ax is None:
         fig, ax = plt.subplots(figsize=(8, 5))
     colors = _STYLES["light"]["energies"]
-    # ZADATAK 2: nacrtajte tri krive u odnosu na vreme (trajectory.times):
-    # kinetičku (trajectory.kinetic_energy), potencijalnu
-    # (trajectory.potential_energy) i ukupnu energiju (trajectory.total_energy).
-
-    # Dok ovo ne uradite, grafik ostaje prazan.
+    ax.plot(trajectory.times, trajectory.kinetic_energy, color=colors[0], label="kinetic energy")
+    ax.plot(trajectory.times, trajectory.potential_energy, color=colors[1], label="potential energy")
+    ax.plot(trajectory.times, trajectory.total_energy, color=colors[2], label="total energy")
+    ax.set_xlabel("time (τ)")
+    ax.set_ylabel("energy (ε)")
+    ax.legend()
     return ax
 
 

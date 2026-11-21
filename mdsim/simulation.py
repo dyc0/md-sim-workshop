@@ -34,13 +34,7 @@ class Trajectory:
     @property
     def total_energy(self):
         """Total energy E = KE + PE of every frame."""
-        # ZADATAK 2: vratite ukupnu energiju za svaki sačuvani frejm,
-        # E = kinetička + potencijalna energija.
-        # self.kinetic_energy i self.potential_energy su nizovi oblika (F,),
-        # jedan broj po frejmu. Potencijalnu energiju već računa petlja za sile.
-        # Rezultat je takođe niz oblika (F,). Dovoljan je jedan red koda.
-        # Dok ovo ne uradite, vraćaju se same nule (ravna linija na nuli).
-        return np.zeros_like(self.potential_energy)
+        return self.kinetic_energy + self.potential_energy
 
     def save(self, path):
         """Save the whole run into one .npz file, every field as a named array."""

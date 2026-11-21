@@ -3,14 +3,14 @@
 Usage, from the repository folder:
 
     git pull                        # get the newest solutions first
-    python apply_solution.py 2      # or 3a, 3b
+    python apply_solution.py 2a     # or 2b
 
 Every file in solutions/problem_<N>/ is copied over the file with the same
-path in the repository, for example solutions/problem_2/mdsim/viz.py over
-mdsim/viz.py. Your own version of those files is replaced. If you have
+path in the repository, for example solutions/problem_2a/mdsim/forces_numpy.py
+over mdsim/forces_numpy.py. Your own version of those files is replaced. If you have
 changed one of them and not committed it yet, the script asks first.
 Afterwards check the result with the problem's test, e.g.
-`pytest tests/test_problem_2.py`, and commit.
+`pytest tests/test_problem_2a.py`, and commit.
 """
 
 import filecmp
@@ -19,7 +19,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-PROBLEMS = ["2", "3a", "3b"]
+PROBLEMS = ["2a", "2b"]
 ROOT = Path(__file__).resolve().parent
 
 

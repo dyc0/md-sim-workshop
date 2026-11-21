@@ -1,9 +1,4 @@
-"""Testovi za Zadatak 2: kinetička energija, ukupna energija i grafik energija.
-
-Pokrenite ih sa:  pytest tests/test_problem_2.py
-Dok zadatak nije urađen, ovi testovi padaju (FAILED). Kad sve prođe (passed),
-zadatak je gotov.
-"""
+"""Tests for the kinetic energy, the total energy and the energy plot."""
 
 import matplotlib
 

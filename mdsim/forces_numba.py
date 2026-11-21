@@ -14,7 +14,7 @@ SHIFT = 4.0 * (0.4**12 - 0.4**6)
 
 
 def _forces_kernel(positions, box, sigmas, epsilons):
-    # ZADATAK 3b: ubrzajte petlju pomoću Numba-e.
+    # ZADATAK 2b: ubrzajte petlju pomoću Numba-e.
     
     # Dok ovo ne uradite, funkcija vraća nulte sile.
     return np.zeros(positions.shape), 0.0

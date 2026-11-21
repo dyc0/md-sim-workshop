@@ -1,5 +1,5 @@
 """Checks that every force version must pass, shared by test_forces.py and the
-Problem 3a and 3b tests. Each check takes the force module to test."""
+Problem 2a and 2b tests. Each check takes the force module to test."""
 
 import numpy as np
 import pytest

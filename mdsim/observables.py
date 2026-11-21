@@ -9,12 +9,8 @@ import numpy as np
 
 def kinetic_energy(velocities, masses):
     """Total kinetic energy, KE = sum over particles of 1/2 * m * |v|^2."""
-    # ZADATAK 2: izračunajte ukupnu kinetičku energiju svih čestica,
-    # KE = zbir po česticama od 1/2 * m * |v|^2.
-
-    # Vratite jedan broj (float). Dok ovo ne uradite, funkcija vraća 0.0,
-    # pa je kinetička energija na grafiku ravna linija na nuli.
-    return 0.0
+    speed_squared = np.sum(velocities * velocities, axis=1)
+    return float(0.5 * np.sum(masses * speed_squared))
 
 
 def temperature(velocities, masses):
@@ -29,11 +25,7 @@ def temperature(velocities, masses):
     """
     n_particles, dim = velocities.shape
     degrees_of_freedom = dim * (n_particles - 1)
-    # The kinetic energy is summed here directly instead of calling
-    # kinetic_energy(), so that temperature works before Problem 2 is done.
-    speed_squared = np.sum(velocities * velocities, axis=1)
-    kinetic = 0.5 * np.sum(masses * speed_squared)
-    return float(2.0 * kinetic / degrees_of_freedom)
+    return 2.0 * kinetic_energy(velocities, masses) / degrees_of_freedom
 
 
 def total_momentum(velocities, masses):

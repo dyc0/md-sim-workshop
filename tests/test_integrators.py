@@ -5,7 +5,7 @@ import pytest
 
 from mdsim.forces_python import compute_forces as python_forces
 from mdsim.integrators import velocity_verlet_step
-from mdsim.observables import total_momentum
+from mdsim.observables import kinetic_energy, total_momentum
 from mdsim.simulation import TimeStepTooLarge, Trajectory, energy_exploded, equilibrate, run
 from mdsim.system import System, make_single_species, make_two_species
 
@@ -35,11 +35,6 @@ def one_particle(position, velocity, mass=1.0):
 
 
 # ---------- integrators ----------
-
-def kinetic_energy(velocities, masses):
-    """The tests' own kinetic energy, so they don't depend on Problem 2."""
-    return 0.5 * np.sum(masses * np.sum(velocities * velocities, axis=1))
-
 
 def total_energy_drift(system, step, n_steps, dt):
     """Largest relative change of total energy during n_steps steps."""

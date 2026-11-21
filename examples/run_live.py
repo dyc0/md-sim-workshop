@@ -10,7 +10,7 @@ Keys: space = pause / resume, r = restart, q = quit, f = fullscreen.
 # ---- Parameters (edit these) ----
 # Units: σ = particle diameter (length), τ = time unit,
 #        ε = attraction strength (energy, and temperature with k_B = 1).
-# ZADATAK 3b: kad napišete forces_numba.py, zamenite forces_python sa
+# ZADATAK 2b: kad napišete forces_numba.py, zamenite forces_python sa
 # forces_numba u redu ispod i probajte više čestica (npr. N_X = N_Y = 20 ili 40).
 from mdsim.forces_python import compute_forces  # or forces_newton3, forces_numpy, forces_numba
 from mdsim.integrators import velocity_verlet_step as step

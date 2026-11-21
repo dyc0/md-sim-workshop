@@ -65,21 +65,20 @@ Some parts of the code are missing: you write them during the workshop, one
 problem at a time. Every place you need to change starts with a comment
 `# ZADATAK N:` (N = problem number) with short instructions. Until you write
 your part, the code still runs, it just does nothing useful there (for
-example the kinetic energy is zero, or a force version returns zero forces).
+example a force version you haven't written yet returns zero forces).
 
 | Problem | What you write | Where | Test |
 |---|---|---|---|
-| 2 | Kinetic and total energy, energy plot | `mdsim/observables.py`, `mdsim/simulation.py`, `mdsim/viz.py` | `pytest tests/test_problem_2.py` |
-| 3a | Forces with NumPy | `mdsim/forces_numpy.py` | `pytest tests/test_problem_3a.py` |
-| 3b | Forces with Numba | `mdsim/forces_numba.py`, `examples/run_live.py` | `pytest tests/test_problem_3b.py` |
+| 2a | Forces with NumPy | `mdsim/forces_numpy.py` | `pytest tests/test_problem_2a.py` |
+| 2b | Forces with Numba | `mdsim/forces_numba.py`, `examples/run_live.py` | `pytest tests/test_problem_2b.py` |
 
 A problem is done when its test file passes. When the next problem starts,
 the solution of the previous one appears in the folder `solutions/`. To get
-it and put it into your code (here for Problem 2):
+it and put it into your code (here for Problem 2a):
 
 ```
 git pull
-python apply_solution.py 2
+python apply_solution.py 2a
 ```
 
 This replaces your version of the files that problem touches with the
@@ -100,7 +99,7 @@ shown in a window and also saved to the folder `output/`.
 | `examples/python_internals.py` | 4 | Python bytecode and memory use of Python numbers vs. NumPy. |
 | `examples/profile_forces.py` | 4 | Profiling: the force calculation takes almost all the time. |
 | `examples/benchmark.py` | 4 | Speed of the four force versions (versions you haven't written yet are skipped). |
-| `examples/mixing.py` | end | Two species mixing: the concentration profile smooths out. Works only once Problem 3b is done. |
+| `examples/mixing.py` | end | Two species mixing: the concentration profile smooths out. Works only once Problem 2b is done. |
 | `examples/play.py` | any | Plays back a saved run: `python examples/play.py output/mixing.npz`. Add a number to play slower, e.g. `... output/mixing.npz 100` (100 ms between pictures). |
 
 ## The code

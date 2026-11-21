@@ -1,6 +1,6 @@
-"""Testovi za Zadatak 3b: sile pomoću Numba-e (forces_numba.py).
+"""Testovi za Zadatak 2b: sile pomoću Numba-e (forces_numba.py).
 
-Pokrenite ih sa:  pytest tests/test_problem_3b.py
+Pokrenite ih sa:  pytest tests/test_problem_2b.py
 Dok zadatak nije urađen, ovi testovi padaju (FAILED). Kad sve prođe (passed),
 zadatak je gotov. Prvo pokretanje traje duže, jer Numba prevodi kod.
 """

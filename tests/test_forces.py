@@ -1,6 +1,6 @@
 """Tests for the pure Python force versions, the ones students are given.
 
-The checks themselves are in force_checks.py; the Problem 3a and 3b tests run the
+The checks themselves are in force_checks.py; the Problem 2a and 2b tests run the
 same checks on the faster versions."""
 
 import pytest
