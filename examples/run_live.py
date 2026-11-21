@@ -13,7 +13,7 @@ Keys: space = pause / resume, r = restart, q = quit, f = fullscreen.
 # ZADATAK 3b: kad napišete forces_numba.py, zamenite forces_python sa
 # forces_numba u redu ispod i probajte više čestica (npr. N_X = N_Y = 20 ili 40).
 from mdsim.forces_python import compute_forces  # or forces_newton3, forces_numpy, forces_numba
-from mdsim.integrators import velocity_verlet_step as step  # or euler_step
+from mdsim.integrators import velocity_verlet_step as step
 
 N_X = 10  # particles along x in the starting grid (N = N_X * N_Y)
 N_Y = 10  # particles along y in the starting grid

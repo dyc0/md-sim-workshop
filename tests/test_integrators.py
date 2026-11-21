@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 
 from mdsim.forces_python import compute_forces as python_forces
-from mdsim.integrators import euler_step, velocity_verlet_step
+from mdsim.integrators import velocity_verlet_step
 from mdsim.observables import total_momentum
 from mdsim.simulation import TimeStepTooLarge, Trajectory, energy_exploded, equilibrate, run
 from mdsim.system import System, make_single_species, make_two_species
@@ -35,43 +35,6 @@ def one_particle(position, velocity, mass=1.0):
 
 
 # ---------- integrators ----------
-
-def test_free_particle_moves_straight_and_wraps():
-    system = one_particle([9.9, 5.0], [1.0, 0.0])
-    forces, _ = zero_forces(system.positions, system.box, system.sigmas, system.epsilons)
-    euler_step(system, forces, 0.2, zero_forces)
-    assert np.allclose(system.positions, [[0.1, 5.0]])
-    assert np.allclose(system.velocities, [[1.0, 0.0]])
-
-
-def test_euler_uses_old_velocity_for_positions():
-    system = one_particle([5.0, 5.0], [0.5, 0.0], mass=2.0)
-    forces, _ = constant_force(system.positions, None, None, None)
-    euler_step(system, forces, 0.1, constant_force)
-    assert system.positions[0, 0] == pytest.approx(5.0 + 0.5 * 0.1, rel=1e-14)
-    assert system.velocities[0, 0] == pytest.approx(0.5 + 0.5 * 0.1, rel=1e-14)
-
-
-def test_compute_forces_called_once_per_step():
-    calls = []
-
-    def counting_forces(positions, box, sigmas, epsilons):
-        calls.append(1)
-        return zero_forces(positions, box, sigmas, epsilons)
-
-    system = one_particle([5.0, 5.0], [1.0, 0.0])
-    euler_step(system, np.zeros((1, 2)), 0.1, counting_forces)
-    assert len(calls) == 1
-
-
-def test_step_returns_forces_at_new_positions():
-    system = make_single_species(10, 10, 0.7, 1.0, seed=2)
-    forces, _ = python_forces(system.positions, system.box, system.sigmas, system.epsilons)
-    new_forces, new_pe = euler_step(system, forces, 0.005, python_forces)
-    expected, expected_pe = python_forces(system.positions, system.box, system.sigmas, system.epsilons)
-    assert np.array_equal(new_forces, expected)
-    assert new_pe == expected_pe
-
 
 def kinetic_energy(velocities, masses):
     """The tests' own kinetic energy, so they don't depend on Problem 2."""
@@ -154,7 +117,7 @@ def test_verlet_momentum_stays_zero_with_unequal_masses():
 def test_run_stores_frames():
     system = make_single_species(10, 10, 0.7, 1.0, seed=2)
     initial_positions = system.positions.copy()
-    traj = run(system, n_steps=25, dt=0.005, step=euler_step, save_every=10, progress=False)
+    traj = run(system, n_steps=25, dt=0.005, save_every=10, progress=False)
     assert traj.positions.shape == (3, 100, 2)
     assert np.allclose(traj.times, [0.0, 0.05, 0.1])
     assert np.array_equal(traj.positions[0], initial_positions)
@@ -163,10 +126,10 @@ def test_run_stores_frames():
     assert traj.dt == 0.005 and traj.save_every == 10
 
 
-def test_run_with_euler_and_python_forces():
+def test_run_with_python_forces():
     from mdsim.forces_python import compute_forces as python_forces
     system = make_single_species(6, 6, 0.7, 1.0, seed=2)
-    traj = run(system, 4, 0.005, step=euler_step, compute_forces=python_forces,
+    traj = run(system, 4, 0.005, compute_forces=python_forces,
                save_every=2, progress=False)
     assert traj.positions.shape == (3, 36, 2)
 
@@ -187,7 +150,7 @@ def test_trajectory_save_load_round_trip(tmp_path):
 def test_absurd_dt_raises_time_step_too_large():
     system = make_single_species(10, 10, 0.7, 1.0, seed=2)
     with pytest.raises(TimeStepTooLarge, match="dt"):
-        run(system, 200, dt=1.0, step=euler_step, progress=False)
+        run(system, 200, dt=1.0, progress=False)
 
 
 def test_energy_exploded():
@@ -201,14 +164,7 @@ def test_energy_exploded():
 def test_explosion_at_moderate_dt_is_caught():
     system = make_single_species(10, 10, 0.7, 1.0, seed=2)
     with pytest.raises(TimeStepTooLarge):
-        run(system, 200, dt=0.05, step=euler_step, progress=False)
-
-
-def test_slow_euler_drift_is_not_an_explosion():
-    # Measured: after 50 Euler steps at dt = 0.005 the energy has grown by about 28 %.
-    system = make_single_species(10, 10, 0.7, 1.0, seed=2)
-    traj = run(system, 50, dt=0.005, step=euler_step, save_every=50, progress=False)
-    assert len(traj.times) == 2  # the run finished without TimeStepTooLarge
+        run(system, 200, dt=0.05, progress=False)
 
 
 def test_progress_output(capsys):
@@ -224,5 +180,5 @@ def test_progress_output(capsys):
 def test_equilibrate_advances_without_storing():
     system = make_single_species(10, 10, 0.7, 1.0, seed=2)
     start = system.positions.copy()
-    assert equilibrate(system, 20, 0.005, step=euler_step) is None
+    assert equilibrate(system, 20, 0.005) is None
     assert not np.array_equal(system.positions, start)

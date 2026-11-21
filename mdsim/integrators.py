@@ -1,6 +1,6 @@
-"""Integrators: rules that move the particles forward by one small time step dt.
+"""Integrator: the rule that moves the particles forward by one small time step dt.
 
-Both functions have the same form:
+It has the form:
 
     new_forces, new_potential_energy = step(system, forces, dt, compute_forces)
 
@@ -8,24 +8,6 @@ Both functions have the same form:
 place. The force function is passed in, so any of the four force versions
 can be used (forces_python, forces_newton3, forces_numpy, forces_numba).
 """
-
-
-def euler_step(system, forces, dt, compute_forces):
-    """Forward Euler: the simplest rule, and it does NOT conserve energy.
-
-    Both updates use the values from the start of the step:
-        new position = position + velocity * dt
-        new velocity = velocity + acceleration * dt
-    The total energy slowly grows, step after step.
-    """
-    masses = system.masses[:, None]
-    # Keep this order: positions first, with the old velocities.
-    # Updating the velocities first would make this "symplectic Euler",
-    # a different method that barely drifts.
-    system.positions += system.velocities * dt
-    system.velocities += (forces / masses) * dt
-    system.positions %= system.box
-    return compute_forces(system.positions, system.box, system.sigmas, system.epsilons)
 
 
 def velocity_verlet_step(system, forces, dt, compute_forces):

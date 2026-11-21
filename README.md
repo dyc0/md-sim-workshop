@@ -112,7 +112,7 @@ shown in a window and also saved to the folder `output/`.
 | `mdsim/forces_newton3.py` | Forces in pure Python, each pair once (Newton's third law) |
 | `mdsim/forces_numpy.py` | Forces with NumPy, no Python loops |
 | `mdsim/forces_numba.py` | Forces compiled with Numba |
-| `mdsim/integrators.py` | Forward Euler and velocity Verlet |
+| `mdsim/integrators.py` | Velocity Verlet, the rule that moves the particles one time step |
 | `mdsim/observables.py` | Kinetic energy, temperature, momentum |
 | `mdsim/simulation.py` | The main loop (`run`) and saved runs (`Trajectory`) |
 | `mdsim/analysis.py` | Concentration profile (mixing) |

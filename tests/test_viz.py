@@ -13,7 +13,6 @@ import pytest  # noqa: E402
 from matplotlib.backend_bases import KeyEvent  # noqa: E402
 
 from mdsim import viz  # noqa: E402
-from mdsim.integrators import euler_step  # noqa: E402
 from mdsim.simulation import run  # noqa: E402
 from mdsim.system import make_single_species  # noqa: E402
 from mdsim.viz import (  # noqa: E402
@@ -64,7 +63,7 @@ def test_draw_particles_rejects_3d():
 def test_animate_live_headless_advances_and_titles():
     system = small_system()
     start_positions = system.positions.copy()
-    fig, anim = animate_live(system, dt=0.001, step=euler_step)
+    fig, anim = animate_live(system, dt=0.005)
     assert not np.array_equal(system.positions, start_positions)
     assert "T =" in fig.axes[0].get_title()
 
@@ -104,7 +103,7 @@ def test_dark_style_has_dark_background():
 
 
 def test_live_viewer_survives_explosion():
-    fig, anim = animate_live(small_system(), dt=1.0, step=euler_step)  # must not raise
+    fig, anim = animate_live(small_system(), dt=1.0)  # must not raise
     assert "time step too large" in fig.axes[0].get_title().lower()
 
 
